@@ -57,4 +57,17 @@ const placeOrder = async (req, res) => {
     }
 };
 
-module.exports = { placeOrder };
+const getOrders = async (req, res) => {
+    try {
+        const orders = await Order.findOne({ userId: req.user.id });
+        res.json(orders);
+        
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Error fetching orders', error });
+    }
+};
+
+
+
+module.exports = { placeOrder,getOrders };
